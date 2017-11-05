@@ -62,7 +62,7 @@ app.get("/index", function(req,res){
             let uri = 'westcentralus.api.cognitive.microsoft.com';
             let path = '/text/analytics/v2.0/sentiment';
             
-            //function
+       
             
             let response_handler = function (response) {
                 let body = '';
