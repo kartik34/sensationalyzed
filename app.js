@@ -289,6 +289,8 @@ app.get("/:site", function(req,res){
 app.set( 'port', ( process.env.PORT || 5000 ));
 
 // Start node server
-app.listen( app.get( 'port' ), function() {
-  console.log( 'Node server is running on port ' + app.get( 'port' ));
-  });
+app.listen(process.env.PORT, process.env.IP, function(){
+    console.log("server is running");
+});
+
+
