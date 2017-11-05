@@ -1,0 +1,202 @@
+  <!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Phantom by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<link href="https://fonts.googleapis.com/css?family=Montserrat|Raleway|Roboto|Poppins" rel="stylesheet">
+		<link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    	<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+    	<script src ="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
+	</head>
+	<body style = "background-color: #dbdce0; font-family: 'Montserrat', sans-serif;">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Logo -->
+								<header style = "margin-top: 4em; margin-bottom: 2em;">
+								<!--<img src="http://i.imgur.com/4VxGqyb.png" alt="" />-->
+								<center><h1 >General Sentiment For: <%= news[0].text %></h1></center>
+							  
+							</header>
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+
+						</div>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="/sentiment">New Term</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							
+							<section class="tiles">
+								<% 
+								
+								
+								var x = 0, y= 0, z= 0, count1 = 0, count2 = 0, count3 = 0; 
+							      for(a=0; a< data["documents"].length; a++){ 
+							        
+							        if(data["documents"][a]["id"].toString().slice(4) == news[0].news1){ 
+							              x += data["documents"][a]["score"]; 
+							              
+							              count1 ++; 
+							        } 
+							        else if(data["documents"][a]["id"].toString().slice(4) == news[0].news2){ 
+							            y += data["documents"][a]["score"]; 
+							            count2 ++;
+							        } 
+							        else if(data["documents"][a]["id"].toString().slice(4) == news[0].news3){ 
+							            z += data["documents"][a]["score"]; 
+							            count3 ++;
+							        }  
+							      } 
+							      %>
+								<article class="style1">
+									<span class="image">
+										<img src="images/pic01.jpg" alt="" />
+									</span>
+									<a href="/<%=news[0].news1%>">
+										<h1><%= news[0].news1 %></h1>
+										<div class="content">
+											<h1> <%=Math.round(( x / count1).toFixed(2)*100) %>% Positive</h1>
+										</div>
+									</a>
+								</article>
+								<article class="style2">
+									<span class="image">
+										<img src="images/pic02.jpg" alt="" />
+									</span>
+									<a href="/<%=news[0].news2%>">
+										<h1><%= news[0].news2 %></h1>
+										<div class="content">
+											<h1> <%=Math.round(( y / count2).toFixed(2)*100) %>% Positive</h1>
+										</div>
+									</a>
+								</article>
+								<article class="style2">
+									<span class="image">
+										<img src="images/pic03.jpg" alt="" />
+									</span>
+									<a href="/<%=news[0].news3%>">
+										<h1><%= news[0].news3 %></h1>
+										<div class="content">
+											<h1> <%= Math.round(( z / count3).toFixed(2)*100) %>% Positive</h1>
+										</div>
+									</a>
+								</article>
+								
+							</section>
+							<section>
+							<canvas id="myChart" width="400" height="200"></canvas>
+							<script>
+							var ctx = document.getElementById("myChart").getContext('2d');
+							var myChart = new Chart(ctx, {
+							    type: 'bar',
+							    data: {
+							        labels: ["<%= news[0].news1 %>", "<%= news[0].news2 %>", "<%= news[0].news3 %>"],
+							        datasets: [{
+							            label: '% Positive Sentiment',
+							            data: [<%= percent1 %>, <%= percent2 %>, <%= percent3 %>],
+							            backgroundColor: [
+							                'rgba(255, 99, 132, 0.2)',
+							                'rgba(54, 162, 235, 0.2)',
+							                'rgba(255, 206, 86, 0.2)'
+							            
+							            ],
+							            borderColor: [
+							                'rgba(255,99,132,1)',
+							                'rgba(54, 162, 235, 1)',
+							                'rgba(255, 206, 86, 1)'
+							          
+							            ],
+							            borderWidth: 1
+							        }]
+							    },
+							    options: {
+							        scales: {
+							            yAxes: [{
+							                ticks: {
+							                    beginAtZero:true
+							                }
+							            }]
+							        }
+							    }
+							});
+							</script>
+							</section >
+							<section class="tiles">
+								<h1 style="margin-left: 35%;">Neutral Alternatives</h1>
+							<article class="style2">
+									<span class="image">
+										<img src="images/pic02.jpg" alt="" />
+									</span>
+									<a href="https://www.theguardian.com/international">
+										<h1>The Guardian</h1>
+										<div class="content">
+										</div>
+									</a>
+								</article>
+								<article class="style2">
+									<span class="image">
+										<img src="images/pic03.jpg" alt="" />
+									</span>
+									<a href="http://www.aljazeera.com/">
+										<h1>Al Jazeera Worldwide</h1>
+										<div class="content">
+										</div>
+									</a>
+								</article>
+								<article class="style2">
+									<span class="image">
+										<img src="images/pic03.jpg" alt="" />
+									</span>
+									<a href="https://www.wsj.com/">
+										<h1>The Wall Street Journal</h1>
+										<div class="content">
+										</div>
+									</a>
+								</article>
+								</section>
+						</div>
+					</div>
+				<!-- Footer -->
+				
+			</div>
+
+		<!-- Scripts -->
+			<script src="js/jquery.min.js"></script>
+			<script src="js/skel.min.js"></script>
+			<script src="js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="js/main.js"></script>
+
+	</body>
+</html>
+
+<!-- Main -->
+					

@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>NextStock</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				
+				<!-- Main --> 
+				<div id="main" style="width:50%; height: 30%; margin-left: 25%; margin-top: 5%;">
+						<div class="inner">
+							<center><h1>Add a Term To Analyze</h1></center>
+						        <form method="POST" action="/sentiment">
+						            <center>
+										<div class="row uniform">
+											<div class="field">
+												<input type="text" name="text" placeholder="Term" />
+											</div>
+											<div class="field">
+												<input type="text" name="news1" placeholder="News Source 1" />
+											</div>
+											<div class="field">
+												<input type="text" name="news2" placeholder="News Source 2" />
+											</div>
+											<div class="field">
+												<input type="text" name="news3" placeholder="News Source 3" />
+											</div>
+											<ul class="field">
+        										<input type="submit" value="Analyze" class="special" />
+        									</ul>
+										</div>
+									</center>
+					            </form>
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/js/jquery.min.js"></script>
+			<script src="/js/skel.min.js"></script>
+			<script src="/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/js/main.js"></script>
+
+	</body>
+</html>

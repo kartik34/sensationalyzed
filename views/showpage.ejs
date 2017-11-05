@@ -1,0 +1,115 @@
+
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Sensationalyzed</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<script src ="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
+
+	</head>
+	<body>
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+
+						</div>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="/index">Dashboard</a></li>
+							<li><a href="/sentiment">New Term</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+						    <h1 style="margin-top: 5%"><%= site%>'s coverage of <%= term%>: In-Depth</h1>
+							<div>
+							    <canvas id="pie-chart" width="-500" height="-500" ></canvas>
+							    <script>
+							    new Chart(document.getElementById("pie-chart"), {
+                                    type: 'pie',
+                                    data: {
+                                      labels: ["Neutrally toned", "Negatively toned", "Positively Toned"],
+                                      datasets: [{
+                                        label: "Percent Rating",
+                                        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
+                                        data: [<%= x %>, <%= y %>, <%= z %>]
+                                      }]
+                                    },
+                                    options: {
+                                      title: {
+                                        display: true,
+                                        text: 'Sentiment Breakdown'
+                                      }
+                                    }
+                                });
+							    </script>
+							   </div> 
+							    
+							<h1>Neutrally Toned Headlines</h1>
+							<% for(a=0; a< 10; a++){ %>
+							
+						<%	 if(data["documents"][a]["score"] <= 0.55 && data["documents"][a]["score"] >= 0.45 ){ %>
+							    <% x++%>
+							   <a href = "<%= body['posts'][a]['thread']['url'] %>"> <h3> <%= body['posts'][a]['title'] %> </h3> </a> 
+							  
+							  
+					            <%	} %>
+					       <% } %>
+					   <% a =0; %>
+					   <h1>Negatively Toned Headlines</h1>
+					   <% for(a=0; a< 10; a++){ %>
+							
+						<%	 if(data["documents"][a]["score"] <0.45){ %>
+							   <a href = "<%= body['posts'][a]['thread']['url'] %>"> <h3> <%= body['posts'][a]['title'] %> </h3> </a> 
+					            <%	} %>
+					       <% } %>
+					       <h1>Positively Toned Headlines</h1>
+					   <% for(a=0; a< 10; a++){ %>
+						    	
+						<%	 if(data["documents"][a]["score"] >0.55){ %>
+							   <a href = "<%= body['posts'][a]['thread']['url'] %>"> <h3> <%= body['posts'][a]['title'] %> </h3> </a> 
+							  
+							  
+					            <%	} %>
+					       <% } %>
+					       
+						</div>
+					</div>
+
+			
+		<!-- Scripts -->
+			<script src="js/jquery.min.js"></script>
+			<script src="js/skel.min.js"></script>
+			<script src="js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="js/main.js"></script>
+
+	</body>
+</html>
