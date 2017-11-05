@@ -9,7 +9,8 @@ var express                   = require("express"),
       
 app.use(express.static("public")); 
         
-mongoose.connect("mongodb://localhost/example_app");
+// mongoose.connect("mongodb://localhost/example_app");
+mongoose.connect("mongodb://kartik34:kartik34@ds011298.mlab.com:11298/sensationalyzed");
 
 var newsSchema = new mongoose.Schema({
     text: String, 
@@ -18,7 +19,7 @@ var newsSchema = new mongoose.Schema({
     news3: String 
 });
 
-var news= mongoose.model("Dog", newsSchema);
+var news= mongoose.model("News", newsSchema);
 
 
 app.set("view engine", "ejs"); 
